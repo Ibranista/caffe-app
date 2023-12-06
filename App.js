@@ -1,20 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, SafeAreaView } from 'react-native';
+import CaffeHeader from './src/components/CaffeHeader';
+import CaffeFooter from './src/components/CaffeFooter';
+import WelcomeScreen from './src/components/WelcomeScreen';
+import { Menu } from './src/components/MenuItems';
 
+// const height = Dimensions.get('screen').height;//#endregi
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={
+      styles.container
+    }>
+     <View
+        style={{
+          backgroundColor: '#495E57',
+          flex: 1,
+        }}>
+        <CaffeHeader />
+        {/* <WelcomeScreen /> */}
+        <Menu />
+      </View>
+      <View style={{ backgroundColor: '#495E57' }}>
+        <CaffeFooter />
+      </View>
+      {/* <StatusBar animated />  */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
