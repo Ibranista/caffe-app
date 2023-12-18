@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { View,Text } from 'react-native';
+import { View,Text, StyleSheet } from 'react-native';
 
 export default function CaffeHeader() {
     return(
         <View
-        style={{
-          backgroundColor: '#F4CE14',
-        //   marginBottom: 10,
-        }}>
+        style={HeaderStyle.container}>
         <Text
           style={{
             fontSize: 18,
@@ -18,3 +15,8 @@ export default function CaffeHeader() {
     )
 }
 
+const HeaderStyle = StyleSheet.create({
+  container:{
+    backgroundColor:'#EDEFEE'
+  }
+})

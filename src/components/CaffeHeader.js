@@ -1,17 +1,22 @@
 import * as React from 'react';
-import { View,Text } from 'react-native';
+import { View,Text, StyleSheet, SafeAreaView } from 'react-native';
 
 export default function CaffeFooter() {
     return(
-        <View style={{ backgroundColor: '#F4CE14' }}>
+        <SafeAreaView style={footerStyle.main}>
         <Text
           style={{
-            padding: 40,
-            fontSize: 30,
+            padding: 10,
+            fontSize: 20,
             color: 'black',
             textAlign: 'center',
           }}>Caffe Header</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 
+const footerStyle = StyleSheet.create({
+  main:{
+    backgroundColor: '#EDEFEE'
+  }
+})
