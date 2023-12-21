@@ -10,9 +10,10 @@ import {NavigationContainer} from '@react-navigation/native';
 // charger's
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-
+import {getHeaderTitle} from '@react-navigation/elements';
 // const height = Dimensions.get('screen').height;//#endregi
+
+
 function HomeScreen() {
 
   return (
@@ -55,18 +56,93 @@ function DetailsScreen({navigation}) {
   );
 }
 
-function TestScreen({navigation}){
+function ForTheTester(){
+  
   return(
-    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-      <Text
-      >Test Screen</Text>
-     <Button
-     color={'orange'}
-     title='Go to Details'
-      onPress={()=>navigation.navigate('Details')}
-      backgroundColor='orange'  
-     />
+    <View>
+      <Text>For The Tester</Text>
     </View>
+  ) 
+}
+
+function BottomBar({navigation,state}){
+  const handleNavigation = (name) => {
+    navigation.navigate(name);
+  };
+  const bottomBarConfig=[
+    {
+      name:'Home',
+      component:HomeScreen,
+    },
+    {
+      name:'Details',
+      component:DetailsScreen,
+    },
+    {
+      name:'Test',
+      component:TestScreen,
+    },
+  ]
+  return(
+    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+      {
+        bottomBarConfig.map((item,index)=>{
+          return(
+            <Button
+            key={index}
+            title={item.name}
+            onPress={()=>handleNavigation(item.name)}
+            />
+          )
+        })
+      }
+    </View>
+  )
+}
+
+function MyHeader({ title, leftButton }) {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'skyblue',
+        height: 50,
+      }}>
+      {leftButton}
+      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{title}</Text>
+    </View>
+  );
+}
+
+function TestScreen({navigation,route}){
+
+  console.log('routes===>',route)
+  return(
+    <>
+<RootStack.Navigator
+tabBar={props=><BottomBar {...props}/>}
+initialRouteName={'Home'}
+screenOptions={{
+  headerShown:true,
+  header: ({ navigation, route, options, back }) => {
+    const title = getHeaderTitle(options, route.name);
+    return (
+      <MyHeader
+        title=''
+        leftButton={<Button onPress={navigation.goBack} 
+        title='Back'
+        />}
+      />
+    );
+  },
+}}
+>
+  <RootStack.Screen name='Home' component={HomeScreen}/>
+  <RootStack.Screen name='Details' component={DetailsScreen}/>
+  <RootStack.Screen name='Test' component={ForTheTester}/>
+</RootStack.Navigator>
+  </>
   )
 }
 
