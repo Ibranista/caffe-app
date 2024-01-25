@@ -8,45 +8,47 @@ const yellow = "yellow";
 const MenuItems = [
   {
     title: "Breakfast",
-    data: ["Eggs", "toast", "bacon", "coffee"],
+    data: [{
+      name: "Eggs",
+      price: 5.99,
+    }],
     color: green,
   },
-  // generate 7 more sections
-  {
-    title: "Lunch",
-    data: ["Sandwich", "Chips", "Soda"],
-    color: yellow,
-  },
-  {
-    title: "Dinner",
-    data: ["Steak", "Potatoes", "Salad", "Wine"],
-    color: green,
-  },
-  {
-    title: "Dessert",
-    data: ["Ice Cream", "Cake", "Pie"],
-    color: yellow,
-  },
-  {
-    title: "Snacks",
-    data: ["Chips", "Pretzels", "Fruit"],
-    color: green,
-  },
-  {
-    title: "Drinks",
-    data: ["Water", "Soda", "Beer", "Wine"],
-    color: yellow,
-  },
-  {
-    title: "Sides",
-    data: ["Fries", "Salad", "Bread"],
-    color: green,
-  },
-  {
-    title: "Appetizers",
-    data: ["Chips", "Dip", "Chips and Dip"],
-    color: yellow,
-  },
+  // {
+  //   title: "Lunch",
+  //   data: ["Sandwich", "Chips", "Soda"],
+  //   color: yellow,
+  // },
+  // {
+  //   title: "Dinner",
+  //   data: ["Steak", "Potatoes", "Salad", "Wine"],
+  //   color: green,
+  // },
+  // {
+  //   title: "Dessert",
+  //   data: ["Ice Cream", "Cake", "Pie"],
+  //   color: yellow,
+  // },
+  // {
+  //   title: "Snacks",
+  //   data: ["Chips", "Pretzels", "Fruit"],
+  //   color: green,
+  // },
+  // {
+  //   title: "Drinks",
+  //   data: ["Water", "Soda", "Beer", "Wine"],
+  //   color: yellow,
+  // },
+  // {
+  //   title: "Sides",
+  //   data: ["Fries", "Salad", "Bread"],
+  //   color: green,
+  // },
+  // {
+  //   title: "Appetizers",
+  //   data: ["Chips", "Dip", "Chips and Dip"],
+  //   color: yellow,
+  // },
 ];
 
 const Item = ({ name }) => {
@@ -56,7 +58,13 @@ const Item = ({ name }) => {
         style={
           menuStyles.container
         }
-      >{name}
+      >{
+          `${name.name} - $${name.price}`
+          // render the key name and value of the object
+        }
+        {Object.keys(name).map((key) => {
+          return `${key}: ${name[key]}`;
+        })}
       </Text>
     </View>
   )
@@ -72,6 +80,7 @@ export const Menu = () => {
   return (
     <View style={menuStyles.container}>
       <SectionList
+        keyExtractor={(_, index) => index}
         sections={MenuItems}
         renderItem={renderItem}
         renderSectionHeader={renderHeader}
