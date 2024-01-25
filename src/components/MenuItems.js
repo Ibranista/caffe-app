@@ -1,129 +1,91 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { View, Text, ScrollView, FlatList } from "react-native";
+import { SectionList, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 
 const green = "#EE9972";
-const yellow = "black";
+const yellow = "yellow";
 
 const MenuItems = [
   {
     title: "Breakfast",
-    text: "Eggs, toast, bacon, coffee",
+    data: ["Eggs", "toast", "bacon", "coffee"],
     color: green,
   },
+  // generate 7 more sections
   {
     title: "Lunch",
-    text: "Soup, salad, sandwich",
+    data: ["Sandwich", "Chips", "Soda"],
     color: yellow,
   },
   {
     title: "Dinner",
-    text: "Pasta, meat, wine",
+    data: ["Steak", "Potatoes", "Salad", "Wine"],
     color: green,
   },
   {
     title: "Dessert",
-    text: "Ice cream, cookies, cake",
+    data: ["Ice Cream", "Cake", "Pie"],
     color: yellow,
+  },
+  {
+    title: "Snacks",
+    data: ["Chips", "Pretzels", "Fruit"],
+    color: green,
   },
   {
     title: "Drinks",
-    text: "Soda, water, beer",
-    color: green,
-  },
-  {
-    title: "Kids Menu",
-    text: "Chicken fingers, fries, juice",
+    data: ["Water", "Soda", "Beer", "Wine"],
     color: yellow,
   },
   {
-    title: "Orange",
-    text: "Red, white, rose",
+    title: "Sides",
+    data: ["Fries", "Salad", "Bread"],
     color: green,
   },
   {
-    title: "Cocktails",
-    text: "Margarita, martini, mojito",
-    color: yellow,
-  },
-  {
-    title: "Beer",
-    text: "IPA, lager, ale",
-    color: green,
-  },
-  {
-    title: "Coffee",
-    text: "Latte, cappuccino, americano",
-    color: yellow,
-  },
-  {
-    title: "Tea",
-    text: "Black, green, herbal",
-    color: green,
-  },
-  {
-    title: "Smoothies",
-    text: "Strawberry, banana, mango",
+    title: "Appetizers",
+    data: ["Chips", "Dip", "Chips and Dip"],
     color: yellow,
   },
 ];
 
+const Item = ({ name }) => {
+  return (
+    <View>
+      <Text
+        style={
+          menuStyles.container
+        }
+      >{name}
+      </Text>
+    </View>
+  )
+}
+
 export const Menu = () => {
+  const renderItem = ({ item }) => <Item name={item} />;
+  const renderHeader = ({ section: { title, color } }) => (
+    <View style={{ backgroundColor: color }}>
+      <Text>{title}</Text>
+    </View>
+  );
   return (
     <View style={menuStyles.container}>
-      <ScrollView style={{
-                margin:40,
-                backgroundColor: '#495E57',
-            }}
-            indicatorStyle={'white'}
-            horizontal={false}
-            >
-                <Text style={{fontSize:40,flexWrap:'wrap',color:'white'}}>View Menu</Text>
-                {MenuItems.map((item,index)=>{
-                    return(
-                        <View
-                            key={index}
-                            style={{
-                                backgroundColor: item.color,
-                                padding: 20,
-                                marginVertical: 8,
-                                marginHorizontal: 16,
-                            }}>
-                            <Text style={{ fontSize: 32, color: "white" }}>
-                                {item.title}
-                            </Text>
-                            <Text style={{ fontSize: 18, color: "white" }}>
-                                {item.text}
-                            </Text>
-                        </View>
-                    )
-                })}
-            </ScrollView>
-      {/* <FlatList
-    //   scrollEnabled
-    indicatorStyle="white"
-        data={MenuItems}
-        renderItem={({item,index}) => (
-          <View
-          key={index}
-            style={{
-              backgroundColor: item.color,
-              padding: 20,
-              marginVertical: 8,
-              marginHorizontal: 16,
-            }}
-          >
-            <Text style={{ fontSize: 32, color: "white" }}>{item.title}</Text>
-            <Text style={{ fontSize: 18, color: "white" }}>{item.text}</Text>
-          </View>
-        )}
-      /> */}
+      <SectionList
+        sections={MenuItems}
+        renderItem={renderItem}
+        renderSectionHeader={renderHeader}
+      />
     </View>
   );
 };
 
-const menuStyles=StyleSheet.create({
-  container:{
-    flex:0.80
+const menuStyles = StyleSheet.create({
+  container: {
+    flex: 0.80,
+    backgroundColor: 'orange',
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 30,
   }
 })
