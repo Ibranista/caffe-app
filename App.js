@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getHeaderTitle } from '@react-navigation/elements';
+import FeedbackForm from './src/components/FeedBackForm';
 // const height = Dimensions.get('screen').height;//#endregi
 
 
@@ -82,6 +83,10 @@ function BottomBar({ navigation, state }) {
       name: 'Test',
       component: TestScreen,
     },
+    {
+      name: 'Form',
+      component: FeedbackForm,
+    }
   ]
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -140,6 +145,7 @@ function TestScreen({ navigation, route }) {
       >
         <RootStack.Screen name='Home' component={HomeScreen} />
         <RootStack.Screen name='Details' component={DetailsScreen} />
+        <RootStack.Screen name='Form' component={FeedbackForm} />
         {/* <RootStack.Screen name='Test' component={ForTheTester}/> */}
       </RootStack.Navigator>
     </>
